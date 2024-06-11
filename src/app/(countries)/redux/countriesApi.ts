@@ -1,5 +1,6 @@
 
-import { apiSlice } from "@/src/redux/apiSlice";
+
+import { apiSlice } from "@redux/apiSlice";
 import { API_ENDPOINT } from "../config";
 
 export const countriesApi = apiSlice.injectEndpoints({
@@ -9,7 +10,7 @@ export const countriesApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: ["Countries"],
     }),
-    getProduct: builder.query({
+    getCountry: builder.query({
       query: (id) => `${API_ENDPOINT}/${id}`,
       providesTags: (result, error, arg) => [{ type: "Country", id: arg }],
     })
@@ -18,5 +19,5 @@ export const countriesApi = apiSlice.injectEndpoints({
 
 export const {
   useGetCountriesQuery,
-  useGetProductQuery,
+  useGetCountryQuery,
 } = countriesApi;

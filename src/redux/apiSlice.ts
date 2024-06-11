@@ -4,10 +4,8 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    mode: "cors",
   }),
-  tagTypes: [
-    "Countries",
-    "Country",
-  ],
+  tagTypes: ["Countries", "Country"],
   endpoints: (builder) => ({}),
 });

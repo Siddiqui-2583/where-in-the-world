@@ -1,7 +1,8 @@
 "use client";
 
-import { store } from "@/src/redux/store";
-import { TChildrenProp } from "@/src/types";
+
+import { store } from "@redux/store";
+import { TChildrenProp } from "@types";
 import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 
