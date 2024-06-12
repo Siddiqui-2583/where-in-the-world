@@ -42,8 +42,8 @@ export default function CountriesHome() {
 
   return (
     <div className="pt-[68px] container mx-auto p-4">
-      <div className="flex flex-col md:flex-row justify-between items-center my-12">
-        <div className="relative w-full">
+      <div className="flex flex-col md:flex-row justify-between items-center my-12 ">
+        <div className="relative w-full max-w-[480px] bg-card">
           <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search />
           </span>
@@ -61,7 +61,7 @@ export default function CountriesHome() {
           value={selectedRegion}
           defaultValue="Asia"
         >
-          <SelectTrigger className="h-[56px] max-w-[200px]">
+          <SelectTrigger className="h-[56px] max-w-[200px] bg-card">
             <SelectValue placeholder="Filter" />
           </SelectTrigger>
           <SelectContent>
@@ -72,7 +72,6 @@ export default function CountriesHome() {
             ))}
           </SelectContent>
         </Select>
-        
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

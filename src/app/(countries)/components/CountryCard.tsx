@@ -1,3 +1,4 @@
+import { Card } from "@components/ui/card";
 import Image from "next/image";
 
 interface CountryCardProps {
@@ -16,7 +17,7 @@ const CountryCard: React.FC<CountryCardProps> = ({
   flagUrl,
 }) => {
   return (
-    <div className="bg-white dark:bg-black shadow-md rounded-lg overflow-hidden">
+    <Card className="bg-white dark:bg-card shadow-md rounded-lg overflow-hidden">
       <Image
         src={flagUrl}
         alt={`${name} flag`}
@@ -36,7 +37,7 @@ const CountryCard: React.FC<CountryCardProps> = ({
           <strong>Capital:</strong> {capital}
         </p>
       </div>
-    </div>
+    </Card>
   );
 };
 
