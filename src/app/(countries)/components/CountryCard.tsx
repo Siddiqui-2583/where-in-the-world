@@ -1,5 +1,6 @@
 import { Card } from "@components/ui/card";
 import Image from "next/image";
+import InfoItem from "./InfoItem";
 
 interface CountryCardProps {
   name: string;
@@ -7,6 +8,7 @@ interface CountryCardProps {
   region: string;
   capital: string;
   flagUrl: string;
+  onClickHandler:()=>void
 }
 
 const CountryCard: React.FC<CountryCardProps> = ({
@@ -14,10 +16,10 @@ const CountryCard: React.FC<CountryCardProps> = ({
   population,
   region,
   capital,
-  flagUrl,
+  flagUrl,onClickHandler
 }) => {
   return (
-    <Card className="bg-white dark:bg-card shadow-md rounded-lg overflow-hidden">
+    <Card className="cursor-pointer overflow-hidden" onClick={onClickHandler}>
       <Image
         src={flagUrl}
         alt={`${name} flag`}
@@ -27,15 +29,9 @@ const CountryCard: React.FC<CountryCardProps> = ({
       />
       <div className="p-4 ">
         <h3 className="font-bold text-xl mb-2">{name}</h3>
-        <p>
-          <strong>Population:</strong> {population.toLocaleString()}
-        </p>
-        <p>
-          <strong>Region:</strong> {region}
-        </p>
-        <p>
-          <strong>Capital:</strong> {capital}
-        </p>
+        <InfoItem title="Population" value={population.toLocaleString()} />
+        <InfoItem title="Region" value={region} />
+        <InfoItem title="Capital" value={capital} />
       </div>
     </Card>
   );

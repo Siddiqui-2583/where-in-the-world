@@ -5,19 +5,23 @@ import { useEffect, useState } from "react";
 import CountryCard from "./components/CountryCard";
 import { Input } from "@components/ui/input";
 import { Search } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@components/ui/select";
 import { filterOptions } from "./config";
+import { useRouter } from "next/navigation";
+import CountryCardSkeleton from "./components/CountryCardSkeleton";
 
 export default function CountriesHome() {
+  const router = useRouter();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const { data: countries, isLoading, isError } = useGetCountriesQuery(null);
-  const {
-    data: country,
-    isLoading: isCountryLoading,
-    isError: isCountryError,
-  } = useGetCountryQuery(selectedId);
 
   useEffect(() => {
     console.log("countries", countries);
@@ -27,7 +31,7 @@ export default function CountriesHome() {
     setSearchTerm(event.target.value);
   };
 
-  const handleRegionChange = (value:string) => {
+  const handleRegionChange = (value: string) => {
     setSelectedRegion(value);
   };
 
@@ -37,8 +41,21 @@ export default function CountriesHome() {
       (selectedRegion === "" || country.region === selectedRegion)
   );
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading countries data</div>;
+  if (isLoading)
+    return (
+      <div className="pt-[200px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <CountryCardSkeleton />
+          <CountryCardSkeleton />
+          <CountryCardSkeleton />
+          <CountryCardSkeleton />
+          <CountryCardSkeleton />
+          <CountryCardSkeleton />
+          <CountryCardSkeleton />
+        </div>
+      </div>
+    );
+  if (isError) return <p className="text-red-600">Error loading countries data</p>;
 
   return (
     <div className="pt-[68px] container mx-auto p-4">
@@ -84,6 +101,10 @@ export default function CountriesHome() {
               region={country.region}
               capital={country.capital ? country.capital[0] : "N/A"}
               flagUrl={country.flags.svg}
+              onClickHandler={() => {
+                router.push(`/${country.name.common}`);
+                setSelectedId(country.name.common);
+              }}
             />
           ))}
       </div>

@@ -1,5 +1,3 @@
-
-
 import { apiSlice } from "@redux/apiSlice";
 import { API_ENDPOINT } from "../config";
 
@@ -11,13 +9,10 @@ export const countriesApi = apiSlice.injectEndpoints({
       providesTags: ["Countries"],
     }),
     getCountry: builder.query({
-      query: (id) => `${API_ENDPOINT}/${id}`,
-      providesTags: (result, error, arg) => [{ type: "Country", id: arg }],
-    })
+      query: (name: string | null) => `name/${name}`,
+      providesTags: (arg) => [{ type: "Country", id: arg }],
+    }),
   }),
 });
 
-export const {
-  useGetCountriesQuery,
-  useGetCountryQuery,
-} = countriesApi;
+export const { useGetCountriesQuery, useGetCountryQuery } = countriesApi;
